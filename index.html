@@ -1,75 +1,1080 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Biological Frontier Foundation</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: linear-gradient(135deg, #020d08 0%, #0a2a18 100%);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      color: #fff;
-      overflow: hidden;
-    }
-    .container {
-      text-align: center;
-      padding: 2rem;
-      max-width: 600px;
-    }
-    .emoji {
-      font-size: 5rem;
-      display: block;
-      margin-bottom: 1.5rem;
-      animation: float 3s ease-in-out infinite;
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
-    }
-    h1 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: #00ff88;
-      margin-bottom: 0.75rem;
-    }
-    .tagline {
-      font-size: 1.2rem;
-      opacity: 0.7;
-      margin-bottom: 1.5rem;
-      font-style: italic;
-    }
-    .body {
-      font-size: 1rem;
-      opacity: 0.55;
-      line-height: 1.6;
-    }
-    .dot {
-      width: 8px; height: 8px;
-      background: #00ff88;
-      border-radius: 50%;
-      display: inline-block;
-      margin: 2rem auto 0;
-      animation: pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.3; transform: scale(0.6); }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biological Frontier Foundation — Defending Your Biological Rights</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ========== CSS RESET & VARIABLES ========== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --forest:#0D2818;
+  --forest-mid:#1A4731;
+  --forest-light:#2D6A4F;
+  --emerald:#40916C;
+  --sage:#74C69D;
+  --mint:#B7E4C7;
+  --cream:#F0FFF4;
+  --white:#FFFFFF;
+  --amber:#D4A017;
+  --amber-light:#F5D060;
+  --amber-dark:#A67C00;
+  --helix-blue:#2B6CB0;
+  --helix-light:#63B3ED;
+  --coral:#E63946;
+  --text-dark:#1A202C;
+  --text-mid:#4A5568;
+  --text-light:#718096;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.12);
+  --shadow-md:0 4px 16px rgba(0,0,0,.1);
+  --shadow-lg:0 10px 40px rgba(0,0,0,.15);
+  --shadow-xl:0 20px 60px rgba(0,0,0,.2);
+  --radius:12px;
+  --radius-lg:20px;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--text-dark);background:var(--cream);line-height:1.7;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+a{color:var(--helix-blue);text-decoration:none;transition:color .2s}
+a:hover{color:var(--amber)}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.2}
+
+/* ========== UTILITY ========== */
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.section{padding:100px 0}
+.section-label{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--emerald);margin-bottom:12px}
+.section-title{font-size:clamp(2rem,4vw,3rem);color:var(--forest);margin-bottom:20px}
+.section-subtitle{font-size:1.1rem;color:var(--text-mid);max-width:700px;margin-bottom:48px}
+
+/* ========== NAV ========== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 0;transition:all .3s}
+.nav.scrolled{background:rgba(13,40,24,.97);backdrop-filter:blur(12px);box-shadow:var(--shadow-md)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;color:var(--white);font-weight:800;font-size:1.2rem;font-family:'Playfair Display',serif}
+.nav-logo svg{width:36px;height:36px}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{color:rgba(255,255,255,.85);font-size:.875rem;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--amber-light)}
+.nav-cta{background:var(--amber);color:var(--forest)!important;padding:8px 20px;border-radius:8px;font-weight:700;font-size:.875rem}
+.nav-cta:hover{background:var(--amber-light);color:var(--forest)!important}
+.mobile-toggle{display:none;background:none;border:none;color:var(--white);font-size:1.5rem;cursor:pointer}
+
+/* ========== HERO ========== */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;background:linear-gradient(135deg,var(--forest) 0%,var(--forest-mid) 40%,#1B5E3A 100%);overflow:hidden}
+.hero-bg-pattern{position:absolute;inset:0;opacity:.06}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:900px;margin:0 auto;padding:120px 24px 80px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);padding:8px 20px;border-radius:50px;color:var(--mint);font-size:.8rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:28px;backdrop-filter:blur(8px)}
+.hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--sage);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-size:clamp(2.5rem,6vw,4.5rem);color:var(--white);margin-bottom:24px;font-weight:900}
+.hero h1 span{background:linear-gradient(135deg,var(--amber-light),var(--amber));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:clamp(1rem,2vw,1.25rem);color:rgba(255,255,255,.75);max-width:650px;margin:0 auto 40px;line-height:1.8}
+.hero-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:10px;font-weight:700;font-size:1rem;border:none;cursor:pointer;transition:all .25s}
+.btn-primary{background:var(--amber);color:var(--forest)}
+.btn-primary:hover{background:var(--amber-light);transform:translateY(-2px);box-shadow:0 8px 30px rgba(212,160,23,.3)}
+.btn-outline{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,.3)}
+.btn-outline:hover{border-color:var(--white);background:rgba(255,255,255,.08)}
+.hero-stats{display:flex;justify-content:center;gap:60px;margin-top:60px;padding-top:40px;border-top:1px solid rgba(255,255,255,.1)}
+.hero-stat{text-align:center}
+.hero-stat .num{font-size:2rem;font-weight:900;color:var(--amber-light);font-family:'Playfair Display',serif}
+.hero-stat .label{font-size:.8rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+
+/* DNA Helix Animation */
+.dna-helix{position:absolute;right:-60px;top:50%;transform:translateY(-50%);width:300px;height:600px;opacity:.12}
+.dna-helix-left{position:absolute;left:-60px;bottom:10%;width:200px;height:400px;opacity:.08}
+
+/* ========== MISSION ========== */
+.mission{background:var(--white)}
+.mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.mission-visual{position:relative}
+.mission-card{background:linear-gradient(135deg,var(--forest),var(--forest-mid));border-radius:var(--radius-lg);padding:48px;color:var(--white);position:relative;overflow:hidden}
+.mission-card::before{content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;background:radial-gradient(circle at 70% 30%,rgba(64,145,108,.3),transparent 50%);pointer-events:none}
+.mission-card blockquote{font-size:1.5rem;font-family:'Playfair Display',serif;line-height:1.5;margin-bottom:20px;position:relative;z-index:1}
+.mission-card cite{font-size:.9rem;color:var(--sage);font-style:normal}
+.mission-text h2{margin-bottom:20px}
+.mission-text p{color:var(--text-mid);margin-bottom:16px}
+.mission-pillars{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
+.pillar{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--cream);border-radius:10px;font-size:.9rem;font-weight:600;color:var(--forest)}
+.pillar svg{width:20px;height:20px;color:var(--emerald);flex-shrink:0}
+
+/* ========== TIMELINE ========== */
+.timeline-section{background:linear-gradient(180deg,var(--cream) 0%,var(--white) 100%)}
+.timeline-filters{display:flex;gap:8px;margin-bottom:40px;flex-wrap:wrap}
+.filter-btn{padding:8px 18px;border-radius:50px;border:1px solid var(--sage);background:transparent;color:var(--forest-mid);font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s}
+.filter-btn.active,.filter-btn:hover{background:var(--forest);color:var(--white);border-color:var(--forest)}
+.timeline{position:relative;padding:20px 0}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--sage),var(--emerald),var(--forest-light));transform:translateX(-50%);border-radius:2px}
+.tl-item{display:flex;width:100%;margin-bottom:40px;position:relative;opacity:0;transform:translateY(30px);transition:all .6s ease}
+.tl-item.visible{opacity:1;transform:translateY(0)}
+.tl-item:nth-child(odd){justify-content:flex-start;padding-right:calc(50% + 40px)}
+.tl-item:nth-child(even){justify-content:flex-end;padding-left:calc(50% + 40px)}
+.tl-dot{position:absolute;left:50%;top:24px;width:16px;height:16px;border-radius:50%;border:3px solid var(--emerald);background:var(--white);transform:translateX(-50%);z-index:2;transition:all .3s}
+.tl-item:hover .tl-dot{background:var(--emerald);transform:translateX(-50%) scale(1.3)}
+.tl-card{background:var(--white);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm);border:1px solid rgba(45,106,79,.08);transition:all .3s;cursor:default;width:100%}
+.tl-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px)}
+.tl-year{display:inline-block;font-size:.75rem;font-weight:700;color:var(--white);background:var(--emerald);padding:3px 12px;border-radius:50px;margin-bottom:10px}
+.tl-card.case .tl-year{background:var(--helix-blue)}
+.tl-card.legislation .tl-year{background:var(--amber-dark)}
+.tl-card.violation .tl-year{background:var(--coral)}
+.tl-card.movement .tl-year{background:var(--forest-light)}
+.tl-card h3{font-size:1.05rem;font-family:'Inter',sans-serif;font-weight:700;margin-bottom:8px;color:var(--forest)}
+.tl-card p{font-size:.88rem;color:var(--text-mid);line-height:1.6}
+.tl-tag{display:inline-block;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);margin-top:10px}
+
+/* ========== FOCUS AREAS ========== */
+.focus-section{background:var(--forest);color:var(--white);position:relative;overflow:hidden}
+.focus-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 80%,rgba(64,145,108,.2),transparent 60%);pointer-events:none}
+.focus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative;z-index:1}
+.focus-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-lg);padding:36px;transition:all .35s}
+.focus-card:hover{background:rgba(255,255,255,.1);transform:translateY(-5px);box-shadow:0 15px 40px rgba(0,0,0,.2)}
+.focus-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:1.5rem}
+.focus-icon.dna{background:rgba(99,179,237,.15);color:var(--helix-light)}
+.focus-icon.health{background:rgba(116,198,157,.15);color:var(--sage)}
+.focus-icon.autonomy{background:rgba(212,160,23,.15);color:var(--amber-light)}
+.focus-icon.cell{background:rgba(230,57,70,.15);color:var(--coral)}
+.focus-icon.biometric{background:rgba(183,228,199,.15);color:var(--mint)}
+.focus-icon.access{background:rgba(245,208,96,.15);color:var(--amber-light)}
+.focus-card h3{font-size:1.2rem;font-family:'Inter',sans-serif;font-weight:700;margin-bottom:12px}
+.focus-card p{font-size:.9rem;color:rgba(255,255,255,.65);line-height:1.7}
+
+/* ========== CASE STUDIES ========== */
+.cases-section{background:var(--white)}
+.case-cards{display:flex;flex-direction:column;gap:24px}
+.case-card{background:var(--cream);border-radius:var(--radius-lg);overflow:hidden;border:1px solid rgba(45,106,79,.1);transition:all .3s}
+.case-header{padding:32px 36px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:background .2s}
+.case-header:hover{background:rgba(45,106,79,.04)}
+.case-header-left{display:flex;align-items:center;gap:20px}
+.case-number{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;color:var(--white);flex-shrink:0}
+.case-number.c1{background:linear-gradient(135deg,var(--helix-blue),#4299E1)}
+.case-number.c2{background:linear-gradient(135deg,var(--emerald),var(--sage))}
+.case-number.c3{background:linear-gradient(135deg,var(--amber-dark),var(--amber))}
+.case-meta h3{font-size:1.3rem;font-family:'Inter',sans-serif;font-weight:800;color:var(--forest);margin-bottom:4px}
+.case-meta .case-tagline{font-size:.9rem;color:var(--text-mid)}
+.case-chevron{width:32px;height:32px;border-radius:50%;background:rgba(45,106,79,.08);display:flex;align-items:center;justify-content:center;transition:all .3s;flex-shrink:0}
+.case-card.open .case-chevron{transform:rotate(180deg);background:var(--emerald);color:var(--white)}
+.case-body{max-height:0;overflow:hidden;transition:max-height .5s ease}
+.case-card.open .case-body{max-height:3000px}
+.case-content{padding:0 36px 36px;display:grid;gap:28px}
+.case-narrative{font-size:.95rem;color:var(--text-mid);line-height:1.8;border-left:3px solid var(--sage);padding-left:20px}
+.case-legal-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.legal-box{padding:24px;border-radius:var(--radius);background:var(--white)}
+.legal-box h4{font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.legal-box h4 .dot-red{width:8px;height:8px;border-radius:50%;background:var(--coral)}
+.legal-box h4 .dot-green{width:8px;height:8px;border-radius:50%;background:var(--emerald)}
+.legal-box h4 .dot-blue{width:8px;height:8px;border-radius:50%;background:var(--helix-blue)}
+.legal-box h4 .dot-amber{width:8px;height:8px;border-radius:50%;background:var(--amber)}
+.legal-box ul{list-style:none;padding:0}
+.legal-box li{font-size:.88rem;color:var(--text-mid);padding:6px 0;padding-left:16px;position:relative;line-height:1.6}
+.legal-box li::before{content:'';position:absolute;left:0;top:14px;width:6px;height:6px;border-radius:50%;background:var(--sage)}
+.legal-box p{font-size:.88rem;color:var(--text-mid);line-height:1.6}
+
+/* ========== GET INVOLVED ========== */
+.involved-section{background:linear-gradient(135deg,var(--forest-mid),var(--forest));color:var(--white);position:relative;overflow:hidden}
+.involved-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.involved-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-lg);padding:36px;text-align:center;transition:all .3s}
+.involved-card:hover{background:rgba(255,255,255,.1);transform:translateY(-4px)}
+.involved-icon{font-size:2.5rem;margin-bottom:16px}
+.involved-card h3{font-size:1.1rem;font-family:'Inter',sans-serif;font-weight:700;margin-bottom:10px}
+.involved-card p{font-size:.88rem;color:rgba(255,255,255,.6);line-height:1.6}
+
+/* ========== RESOURCES ========== */
+.resources-section{background:var(--cream)}
+.resources-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.resource-group h3{font-size:1rem;font-weight:700;color:var(--forest);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.resource-group h3 svg{width:18px;height:18px}
+.resource-group ul{list-style:none}
+.resource-group li{margin-bottom:8px}
+.resource-group a{font-size:.88rem;color:var(--helix-blue);display:flex;align-items:center;gap:6px;transition:all .2s}
+.resource-group a:hover{color:var(--amber);transform:translateX(4px)}
+
+/* ========== FOOTER ========== */
+.footer{background:var(--forest);color:rgba(255,255,255,.5);padding:40px 0;text-align:center;font-size:.85rem}
+.footer a{color:var(--sage)}
+
+/* ========== ORG BRIEF SECTION ========== */
+.org-brief-section{background:var(--white)}
+.org-grid{display:grid;grid-template-columns:2fr 1fr;gap:48px;align-items:start}
+.org-structure{display:flex;flex-direction:column;gap:16px}
+.org-dept{background:var(--cream);border-radius:var(--radius);padding:20px 24px;border-left:4px solid var(--emerald);transition:all .2s}
+.org-dept:hover{transform:translateX(4px);box-shadow:var(--shadow-sm)}
+.org-dept h4{font-size:.95rem;font-weight:700;color:var(--forest);margin-bottom:4px;font-family:'Inter',sans-serif}
+.org-dept p{font-size:.85rem;color:var(--text-mid)}
+.eff-comparison{background:linear-gradient(135deg,var(--forest),var(--forest-mid));color:var(--white);border-radius:var(--radius-lg);padding:32px;position:sticky;top:100px}
+.eff-comparison h3{font-size:1.2rem;margin-bottom:20px}
+.compare-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.compare-row:last-child{border-bottom:none}
+.compare-label{font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.4);width:60px;flex-shrink:0}
+.compare-val{font-size:.88rem;color:rgba(255,255,255,.85)}
+
+/* ========== RESPONSIVE ========== */
+@media(max-width:1024px){
+  .focus-grid,.resources-grid,.involved-grid{grid-template-columns:repeat(2,1fr)}
+  .mission-grid,.org-grid{grid-template-columns:1fr}
+  .case-legal-grid{grid-template-columns:1fr}
+  .timeline::before{left:20px}
+  .tl-item{padding-right:0!important;padding-left:60px!important;justify-content:flex-start!important}
+  .tl-dot{left:20px!important}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .mobile-toggle{display:block}
+  .hero-stats{gap:30px;flex-wrap:wrap}
+  .focus-grid,.resources-grid,.involved-grid{grid-template-columns:1fr}
+  .mission-pillars{grid-template-columns:1fr}
+  .section{padding:60px 0}
+  .case-header{padding:20px}
+  .case-content{padding:0 20px 20px}
+}
+</style>
 </head>
 <body>
-  <div class="container">
-    <span class="emoji">🧬</span>
-    <h1>Biological Frontier Foundation</h1>
-    <p class="tagline">Funding the edges of life itself.</p>
-    <p class="body">The next frontier isn't out there. It's alive.</p>
-    <div class="dot"></div>
+
+<!-- ========== NAVIGATION ========== -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 2L6 10v20l14 8 14-8V10L20 2z" stroke="currentColor" stroke-width="2" fill="none"/>
+        <path d="M14 14c0 0 2 4 6 4s6-4 6-4" stroke="#40916C" stroke-width="2" fill="none"/>
+        <path d="M14 22c0 0 2 4 6 4s6-4 6-4" stroke="#40916C" stroke-width="2" fill="none"/>
+        <path d="M14 18c0 0 2-4 6-4s6 4 6 4" stroke="#D4A017" stroke-width="2" fill="none"/>
+        <path d="M14 26c0 0 2-4 6-4s6 4 6 4" stroke="#D4A017" stroke-width="2" fill="none"/>
+        <circle cx="14" cy="14" r="2" fill="#63B3ED"/>
+        <circle cx="26" cy="14" r="2" fill="#63B3ED"/>
+        <circle cx="14" cy="22" r="2" fill="#63B3ED"/>
+        <circle cx="26" cy="22" r="2" fill="#63B3ED"/>
+      </svg>
+      BFF
+    </a>
+    <ul class="nav-links">
+      <li><a href="#mission">Mission</a></li>
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#focus">Focus Areas</a></li>
+      <li><a href="#org-brief">Organization</a></li>
+      <li><a href="#cases">Case Studies</a></li>
+      <li><a href="#resources">Resources</a></li>
+      <li><a href="#involved" class="nav-cta">Get Involved</a></li>
+    </ul>
+    <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Toggle menu">&#9776;</button>
   </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section class="hero" id="hero">
+  <svg class="hero-bg-pattern" viewBox="0 0 1440 900" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="dna-pat" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
+        <circle cx="60" cy="20" r="3" fill="white" opacity=".5"/>
+        <circle cx="60" cy="100" r="3" fill="white" opacity=".5"/>
+        <path d="M30 20Q60 60 90 20" stroke="white" stroke-width="1" fill="none" opacity=".3"/>
+        <path d="M30 100Q60 60 90 100" stroke="white" stroke-width="1" fill="none" opacity=".3"/>
+        <line x1="45" y1="38" x2="75" y2="38" stroke="white" stroke-width=".5" opacity=".2"/>
+        <line x1="42" y1="60" x2="78" y2="60" stroke="white" stroke-width=".5" opacity=".2"/>
+        <line x1="45" y1="82" x2="75" y2="82" stroke="white" stroke-width=".5" opacity=".2"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#dna-pat)"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-badge"><span class="dot"></span> Founding Initiative 2026</div>
+    <h1>Defending Your <span>Biological Rights</span></h1>
+    <p>Your DNA is yours. Your health data is yours. Your body is yours. The Biological Frontier Foundation fights to keep it that way — protecting biological civil liberties in an era of genetic surveillance, data exploitation, and corporate ownership of human biology.</p>
+    <div class="hero-actions">
+      <a href="#involved" class="btn btn-primary">Join the Movement</a>
+      <a href="#timeline" class="btn btn-outline">Explore the History</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">100+</div><div class="label">Years of Struggle</div></div>
+      <div class="hero-stat"><div class="num">15M+</div><div class="label">DNA Records at Risk</div></div>
+      <div class="hero-stat"><div class="num">6</div><div class="label">Focus Areas</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== MISSION ========== -->
+<section class="section mission" id="mission">
+  <div class="container">
+    <div class="mission-grid">
+      <div class="mission-text">
+        <span class="section-label">Our Mission</span>
+        <h2 class="section-title">Biology Is the New Digital Frontier</h2>
+        <p>Just as the Electronic Frontier Foundation was founded in 1990 to protect civil liberties in the digital world, the Biological Frontier Foundation exists to defend the rights of individuals over their own biological existence.</p>
+        <p>We live in an age where your genome can be sequenced for under $200, your biometric data is captured dozens of times daily, and corporations can patent the building blocks of life itself. Yet legal protections for biological data remain fragmented, outdated, and woefully inadequate.</p>
+        <p>The BFF provides legal defense, policy advocacy, public education, and technological tools to ensure that every person maintains sovereignty over their biological identity.</p>
+        <div class="mission-pillars">
+          <div class="pillar">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V5h2v4z"/></svg>
+            Biological Autonomy
+          </div>
+          <div class="pillar">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"/></svg>
+            Genetic Privacy
+          </div>
+          <div class="pillar">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 12v3c0 1.657 3.134 3 7 3s7-1.343 7-3v-3c0 1.657-3.134 3-7 3s-7-1.343-7-3z"/><path d="M3 7v3c0 1.657 3.134 3 7 3s7-1.343 7-3V7c0 1.657-3.134 3-7 3S3 8.657 3 7z"/><path d="M17 5c0 1.657-3.134 3-7 3S3 6.657 3 5s3.134-3 7-3 7 1.343 7 3z"/></svg>
+            Health Data Sovereignty
+          </div>
+          <div class="pillar">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm9.707 5.707a1 1 0 00-1.414-1.414L9 12.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            Informed Consent
+          </div>
+        </div>
+      </div>
+      <div class="mission-visual">
+        <div class="mission-card">
+          <blockquote>"The most intimate data about a human being — their DNA, their cells, their biological identity — deserves at least the same protections we demand for our emails and phone calls."</blockquote>
+          <cite>— Biological Frontier Foundation, Founding Principles</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TIMELINE ========== -->
+<section class="section timeline-section" id="timeline">
+  <div class="container">
+    <span class="section-label">Historical Record</span>
+    <h2 class="section-title">A Century of Biological Civil Liberties</h2>
+    <p class="section-subtitle">From forced sterilization to genetic surveillance, the struggle for biological rights has shaped — and been shaped by — some of the most consequential legal battles in history.</p>
+
+    <div class="timeline-filters">
+      <button class="filter-btn active" data-filter="all">All Events</button>
+      <button class="filter-btn" data-filter="case">Court Cases</button>
+      <button class="filter-btn" data-filter="legislation">Legislation</button>
+      <button class="filter-btn" data-filter="violation">Violations</button>
+      <button class="filter-btn" data-filter="movement">Movements</button>
+    </div>
+
+    <div class="timeline" id="timeline-container">
+
+      <!-- 1927 -->
+      <div class="tl-item" data-type="case">
+        <div class="tl-dot"></div>
+        <div class="tl-card case">
+          <span class="tl-year">1927</span>
+          <h3>Buck v. Bell — Forced Sterilization Upheld</h3>
+          <p>The U.S. Supreme Court ruled 8-1 that compulsory sterilization of the "unfit" was constitutional. Justice Oliver Wendell Holmes infamously declared "Three generations of imbeciles are enough." Over 60,000 Americans were forcibly sterilized under laws this decision enabled, and the ruling was cited by Nazi defendants at Nuremberg. The decision has never been explicitly overturned.</p>
+          <span class="tl-tag">Court Case · Bodily Autonomy</span>
+        </div>
+      </div>
+
+      <!-- 1932 -->
+      <div class="tl-item" data-type="violation">
+        <div class="tl-dot"></div>
+        <div class="tl-card violation">
+          <span class="tl-year">1932</span>
+          <h3>Tuskegee Syphilis Study Begins</h3>
+          <p>The U.S. Public Health Service began a 40-year study on nearly 400 Black men with syphilis in Tuskegee, Alabama. Participants were told they were receiving "special free treatment" but were never given penicillin, even after it became standard treatment. By the study's end in 1972, 28 had died of syphilis, 100 from complications, 40 wives were infected, and 19 children were born with congenital syphilis.</p>
+          <span class="tl-tag">Violation · Informed Consent</span>
+        </div>
+      </div>
+
+      <!-- 1942 -->
+      <div class="tl-item" data-type="case">
+        <div class="tl-dot"></div>
+        <div class="tl-card case">
+          <span class="tl-year">1942</span>
+          <h3>Skinner v. Oklahoma — Reproductive Rights</h3>
+          <p>The Supreme Court struck down Oklahoma's Habitual Criminal Sterilization Act, ruling that procreation is "one of the basic civil rights of man." While not explicitly overturning Buck v. Bell, this decision significantly weakened its precedent by establishing strict scrutiny for laws affecting reproductive rights.</p>
+          <span class="tl-tag">Court Case · Reproductive Rights</span>
+        </div>
+      </div>
+
+      <!-- 1951 -->
+      <div class="tl-item" data-type="violation">
+        <div class="tl-dot"></div>
+        <div class="tl-card violation">
+          <span class="tl-year">1951</span>
+          <h3>Henrietta Lacks — HeLa Cells Taken Without Consent</h3>
+          <p>Cervical cancer cells were harvested from Henrietta Lacks at Johns Hopkins Hospital without her knowledge or consent. Her "immortal" HeLa cells became one of the most important tools in medicine — contributing to the polio vaccine, cancer research, and over 100,000 scientific publications — while her family received nothing and remained unaware for decades. The case became a catalyst for bioethics reform.</p>
+          <span class="tl-tag">Violation · Cell Line Rights</span>
+        </div>
+      </div>
+
+      <!-- 1974 -->
+      <div class="tl-item" data-type="legislation">
+        <div class="tl-dot"></div>
+        <div class="tl-card legislation">
+          <span class="tl-year">1974</span>
+          <h3>National Research Act — Birth of IRBs</h3>
+          <p>Passed in direct response to the Tuskegee revelations, this act established the requirement for Institutional Review Boards (IRBs) to review all federally funded human subjects research. It created the National Commission for the Protection of Human Subjects of Biomedical and Behavioral Research, which produced the landmark Belmont Report in 1979.</p>
+          <span class="tl-tag">Legislation · Research Ethics</span>
+        </div>
+      </div>
+
+      <!-- 1990 -->
+      <div class="tl-item" data-type="case">
+        <div class="tl-dot"></div>
+        <div class="tl-card case">
+          <span class="tl-year">1990</span>
+          <h3>Moore v. Regents of UC — No Property Rights in Cells</h3>
+          <p>John Moore's cancerous spleen cells were developed into a patented cell line worth billions without his knowledge. The California Supreme Court ruled that patients have no property rights over their discarded biological materials, though physicians have a duty to disclose financial interests. This devastating precedent essentially declared that once cells leave your body, they are no longer yours.</p>
+          <span class="tl-tag">Court Case · Cell Ownership</span>
+        </div>
+      </div>
+
+      <!-- 1991 -->
+      <div class="tl-item" data-type="legislation">
+        <div class="tl-dot"></div>
+        <div class="tl-card legislation">
+          <span class="tl-year">1991</span>
+          <h3>The Common Rule Adopted</h3>
+          <p>The Federal Policy for the Protection of Human Subjects was adopted by 15 federal agencies, establishing uniform standards for informed consent, IRB review, and protections for vulnerable populations including pregnant women, prisoners, and children. Revised significantly in 2018 to address modern research methods.</p>
+          <span class="tl-tag">Legislation · Research Ethics</span>
+        </div>
+      </div>
+
+      <!-- 1996 -->
+      <div class="tl-item" data-type="legislation">
+        <div class="tl-dot"></div>
+        <div class="tl-card legislation">
+          <span class="tl-year">1996</span>
+          <h3>HIPAA — Health Information Privacy</h3>
+          <p>The Health Insurance Portability and Accountability Act established the first national standards for protecting individually identifiable health information. The Privacy Rule (effective 2003) and Security Rule (effective 2005) created a framework for health data protection — though significant gaps remain, particularly for consumer health apps and direct-to-consumer genetic testing companies.</p>
+          <span class="tl-tag">Legislation · Health Data</span>
+        </div>
+      </div>
+
+      <!-- 2003 -->
+      <div class="tl-item" data-type="case">
+        <div class="tl-dot"></div>
+        <div class="tl-card case">
+          <span class="tl-year">2003</span>
+          <h3>Greenberg v. Miami Children's Hospital — Donor Betrayal</h3>
+          <p>Families who donated tissue and funding to Canavan disease research discovered the researcher had secretly patented the gene they helped identify. The court dismissed most claims but upheld unjust enrichment, establishing that research donors don't own their tissue but may have claims when researchers profit from their contributions without disclosure.</p>
+          <span class="tl-tag">Court Case · Genetic Research</span>
+        </div>
+      </div>
+
+      <!-- 2008 -->
+      <div class="tl-item" data-type="legislation">
+        <div class="tl-dot"></div>
+        <div class="tl-card legislation">
+          <span class="tl-year">2008</span>
+          <h3>GINA — Genetic Nondiscrimination Act</h3>
+          <p>After 13 years of advocacy, Congress passed GINA with overwhelming bipartisan support (95-0 in the Senate). The law prohibits genetic discrimination in health insurance and employment but notably fails to cover life insurance, disability insurance, or long-term care — leaving critical gaps. It was a landmark first step but remains incomplete protection.</p>
+          <span class="tl-tag">Legislation · Genetic Privacy</span>
+        </div>
+      </div>
+
+      <!-- 2008 DIY Bio -->
+      <div class="tl-item" data-type="movement">
+        <div class="tl-dot"></div>
+        <div class="tl-card movement">
+          <span class="tl-year">2008</span>
+          <h3>DIYbio Movement Founded</h3>
+          <p>The DIYbio organization launched, catalyzing a global movement of citizen scientists, biohackers, and community biology labs. Genspace (2010) became the first community bio lab, followed by BioCurious and others. The movement champions democratized access to biotechnology and the right of individuals to study and modify biology outside institutional settings.</p>
+          <span class="tl-tag">Movement · Biological Autonomy</span>
+        </div>
+      </div>
+
+      <!-- 2013 Myriad -->
+      <div class="tl-item" data-type="case">
+        <div class="tl-dot"></div>
+        <div class="tl-card case">
+          <span class="tl-year">2013</span>
+          <h3>AMP v. Myriad Genetics — Genes Cannot Be Patented</h3>
+          <p>In a unanimous decision, the Supreme Court ruled that naturally occurring DNA segments are products of nature and cannot be patented, invalidating Myriad's patents on the BRCA1 and BRCA2 cancer-risk genes. The decision struck down thirty years of gene patents by the USPTO and opened up genetic testing to competition, dramatically increasing accessibility of cancer screening.</p>
+          <span class="tl-tag">Court Case · Gene Patents</span>
+        </div>
+      </div>
+
+      <!-- 2013 Maryland v King -->
+      <div class="tl-item" data-type="case">
+        <div class="tl-dot"></div>
+        <div class="tl-card case">
+          <span class="tl-year">2013</span>
+          <h3>Maryland v. King — DNA Collection Upon Arrest</h3>
+          <p>The Supreme Court ruled 5-4 that collecting DNA from arrestees (not just convicts) is constitutional, likening it to fingerprinting. Justice Scalia's blistering dissent, joined by Ginsburg, Sotomayor, and Kagan, warned this suspicionless biological search was "the most important criminal procedure case this Court has heard in decades" — and a dangerous expansion of state power over biological identity.</p>
+          <span class="tl-tag">Court Case · DNA Surveillance</span>
+        </div>
+      </div>
+
+      <!-- 2013 HeLa Genome -->
+      <div class="tl-item" data-type="movement">
+        <div class="tl-dot"></div>
+        <div class="tl-card movement">
+          <span class="tl-year">2013</span>
+          <h3>HeLa Genome Published — NIH Agreement</h3>
+          <p>When researchers published the complete HeLa genome without the Lacks family's consent, the resulting outcry led to an unprecedented NIH agreement: scientists must now receive permission from a committee that includes Lacks family members to access the HeLa genome for NIH-funded research, establishing a new model for donor involvement in genetic research governance.</p>
+          <span class="tl-tag">Movement · Genetic Privacy</span>
+        </div>
+      </div>
+
+      <!-- 2015 Open Insulin -->
+      <div class="tl-item" data-type="movement">
+        <div class="tl-dot"></div>
+        <div class="tl-card movement">
+          <span class="tl-year">2015</span>
+          <h3>Open Insulin Project Launches</h3>
+          <p>Founded by Anthony Di Franco, the Open Insulin Project aimed to reverse-engineer insulin production and release open-source protocols, potentially reducing costs by 98%. The project embodies the principle that access to life-saving medicine is a biological right, echoing Frederick Banting's 1923 decision to sell his insulin patent for just $1.</p>
+          <span class="tl-tag">Movement · Access to Health</span>
+        </div>
+      </div>
+
+      <!-- 2018 Carpenter -->
+      <div class="tl-item" data-type="case">
+        <div class="tl-dot"></div>
+        <div class="tl-card case">
+          <span class="tl-year">2018</span>
+          <h3>Carpenter v. United States — Digital Privacy Expanded</h3>
+          <p>The Supreme Court ruled that accessing historical cell phone location data requires a warrant, establishing that individuals retain Fourth Amendment rights in data disclosed to third parties. Legal scholars note this framework has profound implications for biological data: if location data deserves protection, genetic and biometric data — far more intimate — should demand even greater safeguards.</p>
+          <span class="tl-tag">Court Case · Data Privacy</span>
+        </div>
+      </div>
+
+      <!-- 2018 Golden State Killer -->
+      <div class="tl-item" data-type="violation">
+        <div class="tl-dot"></div>
+        <div class="tl-card violation">
+          <span class="tl-year">2018</span>
+          <h3>Golden State Killer — Genealogy Database Dragnet</h3>
+          <p>Law enforcement identified Joseph James DeAngelo by uploading crime scene DNA to GEDmatch, a public genealogy database, and tracing family trees to find him through his relatives' DNA. While the arrest was celebrated, the technique exposed how submitting your DNA also subjects all your biological relatives to potential surveillance — without their knowledge or consent.</p>
+          <span class="tl-tag">Violation · Genetic Surveillance</span>
+        </div>
+      </div>
+
+      <!-- 2018 Right to Try -->
+      <div class="tl-item" data-type="legislation">
+        <div class="tl-dot"></div>
+        <div class="tl-card legislation">
+          <span class="tl-year">2018</span>
+          <h3>Right to Try Act Signed</h3>
+          <p>President Trump signed the Right to Try Act, allowing terminally ill patients who have exhausted approved treatment options to access investigational drugs that have passed Phase I clinical trials, bypassing the FDA's expanded access process. The law affirmed the principle that patients have a right to make decisions about their own bodies and treatment.</p>
+          <span class="tl-tag">Legislation · Access to Treatment</span>
+        </div>
+      </div>
+
+      <!-- 2019 CRISPR Law -->
+      <div class="tl-item" data-type="legislation">
+        <div class="tl-dot"></div>
+        <div class="tl-card legislation">
+          <span class="tl-year">2019</span>
+          <h3>California's First CRISPR Consumer Law</h3>
+          <p>California became the first state to directly regulate CRISPR technology, requiring that DIY gene-editing kits carry warnings stating they are "not for self-administration." The law highlighted the tension between individual biological autonomy and public safety, a debate that continues to intensify as gene-editing tools become increasingly accessible and affordable.</p>
+          <span class="tl-tag">Legislation · Gene Editing</span>
+        </div>
+      </div>
+
+      <!-- 2020 Illinois BIPA -->
+      <div class="tl-item" data-type="legislation">
+        <div class="tl-dot"></div>
+        <div class="tl-card legislation">
+          <span class="tl-year">2008–2025</span>
+          <h3>Illinois BIPA — The Gold Standard for Biometric Privacy</h3>
+          <p>Illinois's Biometric Information Privacy Act, enacted in 2008, became the most consequential biometric privacy law in the U.S. — the only state law with a private right of action. By 2025, over 107 new BIPA class actions were filed in a single year, with settlements including Clearview AI ($51.75M) and Facebook ($650M). The law inspired biometric privacy legislation in Texas, Washington, and beyond.</p>
+          <span class="tl-tag">Legislation · Biometric Privacy</span>
+        </div>
+      </div>
+
+      <!-- 2023 Newborn DNA -->
+      <div class="tl-item" data-type="violation">
+        <div class="tl-dot"></div>
+        <div class="tl-card violation">
+          <span class="tl-year">2023</span>
+          <h3>Newborn Blood Spot DNA — Secret State Databases</h3>
+          <p>Investigations revealed that states were storing newborn blood spot samples for decades — and sharing them with law enforcement and researchers without parental knowledge or consent. New Jersey was sued for retaining samples over 20 years; California stores samples indefinitely with no opt-out. More than a quarter of U.S. states have no policy restricting law enforcement access to these samples.</p>
+          <span class="tl-tag">Violation · Genetic Surveillance</span>
+        </div>
+      </div>
+
+      <!-- 2025 23andMe -->
+      <div class="tl-item" data-type="violation">
+        <div class="tl-dot"></div>
+        <div class="tl-card violation">
+          <span class="tl-year">2025</span>
+          <h3>23andMe Bankruptcy — 15 Million Genomes in Limbo</h3>
+          <p>23andMe filed for bankruptcy on March 23, 2025, putting the genetic data of over 15 million people at risk of being sold as a corporate asset. The database was ultimately acquired for $305 million by a nonprofit created by 23andMe's own founder. 25 state attorneys general moved to halt the sale, exposing the absence of federal law protecting genetic data held by consumer companies outside of HIPAA's reach.</p>
+          <span class="tl-tag">Violation · Data Sovereignty</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOCUS AREAS ========== -->
+<section class="section focus-section" id="focus">
+  <div class="container">
+    <span class="section-label" style="color:var(--sage)">Areas of Focus</span>
+    <h2 class="section-title" style="color:var(--white)">Six Pillars of Biological Rights</h2>
+    <p class="section-subtitle" style="color:rgba(255,255,255,.6)">The BFF works across six interconnected domains where biological civil liberties are most threatened — and most in need of defense.</p>
+
+    <div class="focus-grid">
+      <div class="focus-card">
+        <div class="focus-icon dna">&#x1F9EC;</div>
+        <h3>Genetic Privacy</h3>
+        <p>Protecting your DNA data from corporate exploitation, government surveillance, and unauthorized research. Your genetic code is the most personal data that exists — it should never be bought, sold, or accessed without your explicit, informed, and revocable consent.</p>
+      </div>
+      <div class="focus-card">
+        <div class="focus-icon health">&#x1F3E5;</div>
+        <h3>Health Data Sovereignty</h3>
+        <p>You should own and control your complete health records — every test result, diagnosis, prescription, and clinical note. We fight for true data portability, the right to export, delete, and restrict access to health information across all platforms and providers.</p>
+      </div>
+      <div class="focus-card">
+        <div class="focus-icon autonomy">&#x2696;&#xFE0F;</div>
+        <h3>Biological Autonomy</h3>
+        <p>The right to make informed decisions about your own body — including the right to access experimental treatments, to modify your own biology, and to refuse unwanted biological interventions. Your body, your choice, your sovereignty.</p>
+      </div>
+      <div class="focus-card">
+        <div class="focus-icon cell">&#x1F52C;</div>
+        <h3>Cell Line Rights</h3>
+        <p>From Henrietta Lacks to modern biobanks, the question of who owns your biological materials remains unresolved. We advocate for clear legal frameworks that give individuals ownership and benefit-sharing rights over their cells, tissues, and biological derivatives.</p>
+      </div>
+      <div class="focus-card">
+        <div class="focus-icon biometric">&#x1F91A;</div>
+        <h3>Biometric Freedom</h3>
+        <p>Facial recognition, fingerprint scanning, iris detection, voice prints, gait analysis — biometric surveillance is expanding rapidly. We fight for the right to move through the world without your body being used as a tracking device, and for strong laws like Illinois BIPA nationwide.</p>
+      </div>
+      <div class="focus-card">
+        <div class="focus-icon access">&#x1F48A;</div>
+        <h3>Access to Health Innovation</h3>
+        <p>The right to experimental treatments, open-source medicine, DIY biology, and community-driven health research. We support initiatives like the Open Insulin Project and the Right to Try Act — because access to the tools of biological understanding should not be gated by wealth or institutional power.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ORGANIZATIONAL BRIEF ========== -->
+<section class="section org-brief-section" id="org-brief">
+  <div class="container">
+    <span class="section-label">Organizational Brief</span>
+    <h2 class="section-title">How the BFF Works</h2>
+    <p class="section-subtitle">Modeled after the Electronic Frontier Foundation's proven structure, the BFF combines legal firepower, policy expertise, grassroots advocacy, and technological innovation to defend biological rights.</p>
+
+    <div class="org-grid">
+      <div class="org-structure">
+        <div class="org-dept">
+          <h4>Legal Defense Team</h4>
+          <p>Impact litigation attorneys who take on precedent-setting cases involving genetic privacy, cell line ownership, biometric surveillance, and biological autonomy. Like EFF's legal team, we file amicus briefs, represent individuals, and challenge unconstitutional laws.</p>
+        </div>
+        <div class="org-dept">
+          <h4>Policy &amp; Legislative Affairs</h4>
+          <p>Advocates who work with legislators at state and federal levels to draft and advance biological rights legislation — from comprehensive genetic privacy laws to biometric protection statutes and patient access reforms.</p>
+        </div>
+        <div class="org-dept">
+          <h4>Research &amp; Analysis</h4>
+          <p>Scientists, bioethicists, and legal scholars who produce white papers, threat assessments, and policy recommendations on emerging biological technologies and their civil liberties implications — from AI-driven genomics to synthetic biology.</p>
+        </div>
+        <div class="org-dept">
+          <h4>Grassroots Activism &amp; Education</h4>
+          <p>Community organizers and educators who run public awareness campaigns, know-your-rights workshops, and coalition-building efforts. We empower individuals to understand and exercise their biological rights.</p>
+        </div>
+        <div class="org-dept">
+          <h4>Technology Projects</h4>
+          <p>Engineers and developers building open-source tools for encrypted health data storage, genetic data sovereignty platforms, and biometric opt-out technologies — giving people practical tools to protect their biological privacy.</p>
+        </div>
+      </div>
+
+      <div class="eff-comparison">
+        <h3>EFF ↔ BFF Parallel</h3>
+        <div class="compare-row">
+          <span class="compare-label">EFF</span>
+          <span class="compare-val">Protects digital communications</span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-label">BFF</span>
+          <span class="compare-val">Protects biological data &amp; identity</span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-label">EFF</span>
+          <span class="compare-val">Fights mass digital surveillance</span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-label">BFF</span>
+          <span class="compare-val">Fights biometric &amp; genetic surveillance</span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-label">EFF</span>
+          <span class="compare-val">Defends right to online privacy</span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-label">BFF</span>
+          <span class="compare-val">Defends right to genetic privacy</span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-label">EFF</span>
+          <span class="compare-val">Champions open-source software</span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-label">BFF</span>
+          <span class="compare-val">Champions open-source medicine</span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-label">EFF</span>
+          <span class="compare-val">Fights corporate data exploitation</span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-label">BFF</span>
+          <span class="compare-val">Fights corporate bio-data exploitation</span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-label">EFF</span>
+          <span class="compare-val">Founded 1990 — digital frontier</span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-label">BFF</span>
+          <span class="compare-val">Founded 2026 — biological frontier</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CASE STUDIES ========== -->
+<section class="section cases-section" id="cases">
+  <div class="container">
+    <span class="section-label">Future Scenarios</span>
+    <h2 class="section-title">Three Cases That Will Define Biological Rights</h2>
+    <p class="section-subtitle">These speculative case studies — set 5 to 15 years from now — illustrate the legal battles ahead. The precedents we set today will determine the outcome.</p>
+
+    <div class="case-cards">
+
+      <!-- CASE 1 -->
+      <div class="case-card" id="case1">
+        <div class="case-header" onclick="toggleCase('case1')">
+          <div class="case-header-left">
+            <div class="case-number c1">I</div>
+            <div class="case-meta">
+              <h3>The Gene Editor</h3>
+              <span class="case-tagline">United States v. Reyes (2031) — The Right to Modify Your Own Body</span>
+            </div>
+          </div>
+          <div class="case-chevron">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4 6l4 4 4-4"/></svg>
+          </div>
+        </div>
+        <div class="case-body">
+          <div class="case-content">
+            <div class="case-narrative">
+              <p>In 2031, Dr. Elena Reyes — a molecular biologist and carrier of the BRCA1 mutation — watches her sister die of breast cancer after years of prohibitively expensive treatment. Reyes, who had been denied coverage for a preventive gene therapy by her insurer, designs and self-administers a CRISPR-based therapy targeting the BRCA1 mutation in her own somatic cells.</p>
+              <p>She documents her protocol openly, publishing her methods and results on an open-science platform. Within months, dozens of other BRCA carriers begin following her protocol. The FDA, under pressure from pharmaceutical companies with competing (and far more expensive) gene therapies in their pipelines, charges Reyes with manufacturing and distributing an "unapproved biological product" under the Federal Food, Drug, and Cosmetic Act.</p>
+              <p>The BFF takes her case, arguing that Reyes has a fundamental right to modify her own biological material — that bodily autonomy necessarily includes the right to alter one's own genome for therapeutic purposes. The prosecution argues that without FDA oversight, self-administered gene therapies pose unacceptable risks to the individual and, potentially, to the gene pool.</p>
+            </div>
+            <div class="case-legal-grid">
+              <div class="legal-box">
+                <h4><span class="dot-red"></span> Prosecution Arguments</h4>
+                <ul>
+                  <li>CRISPR therapies are "drugs" under federal law and require FDA approval regardless of who administers them</li>
+                  <li>Self-administration bypasses safety protocols designed to protect individuals from untested treatments</li>
+                  <li>Publishing protocols constitutes "distribution" of an unapproved biological product, potentially endangering others</li>
+                  <li>Allowing unregulated gene editing sets a dangerous precedent that could extend to germline modifications</li>
+                </ul>
+              </div>
+              <div class="legal-box">
+                <h4><span class="dot-green"></span> BFF Defense</h4>
+                <ul>
+                  <li>Bodily autonomy — the most fundamental biological right — includes the right to modify one's own cells</li>
+                  <li>The Right to Try Act (2018) already established that patients can access unapproved treatments; self-directed therapy is the logical extension</li>
+                  <li>Publishing research is protected speech under the First Amendment, not "distribution" of a drug</li>
+                  <li>The prosecution is driven by corporate interests, not patient safety — Reyes's protocol targets only somatic cells, not germline</li>
+                </ul>
+              </div>
+              <div class="legal-box">
+                <h4><span class="dot-blue"></span> Relevant Precedent</h4>
+                <ul>
+                  <li>California's 2019 CRISPR law (consumer regulation without criminalizing self-use)</li>
+                  <li>Right to Try Act (2018) — patient access to unapproved treatments</li>
+                  <li>Cruzan v. Director (1990) — right to refuse medical treatment</li>
+                  <li>FDA v. Brown & Williamson (2000) — limits of FDA regulatory authority</li>
+                </ul>
+              </div>
+              <div class="legal-box">
+                <h4><span class="dot-amber"></span> Future Impact</h4>
+                <p>A ruling for Reyes could establish a constitutional right to self-directed gene therapy, forcing regulators to distinguish between personal biological modification and commercial drug distribution. A ruling against her could criminalize an entire category of self-care and entrench pharmaceutical gatekeeping over genetic medicine.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASE 2 -->
+      <div class="case-card" id="case2">
+        <div class="case-header" onclick="toggleCase('case2')">
+          <div class="case-header-left">
+            <div class="case-number c2">II</div>
+            <div class="case-meta">
+              <h3>The Data Sovereign</h3>
+              <span class="case-tagline">Okafor v. HelixPharma Corp. (2035) — Who Owns the Drugs Made from Your DNA?</span>
+            </div>
+          </div>
+          <div class="case-chevron">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4 6l4 4 4-4"/></svg>
+          </div>
+        </div>
+        <div class="case-body">
+          <div class="case-content">
+            <div class="case-narrative">
+              <p>In 2035, Amara Okafor discovers that GenomeLink — a consumer genetics company she submitted her saliva sample to in 2027 — sold her anonymized genomic data to HelixPharma Corp. as part of a bulk dataset of 8 million genomes. HelixPharma's AI identified a rare genetic variant in Okafor's genome that conferred natural resistance to a form of liver disease. They used this discovery to develop a blockbuster drug now generating $4 billion annually.</p>
+              <p>Okafor learns of this when she recognizes her own genetic variant described in HelixPharma's published research. She sues for ownership rights over derivatives of her genetic information, seeking compensation and an injunction requiring her consent for future use. HelixPharma argues the data was anonymized, covered by GenomeLink's Terms of Service, and that the drug is a novel invention, not a copy of her DNA.</p>
+              <p>The BFF intervenes on Okafor's behalf, arguing that consent obtained through a clickwrap agreement for a consumer genetics service cannot extend to pharmaceutical development worth billions, and that the concept of "anonymization" is a fiction when dealing with genetic data — which is, by definition, personally identifiable.</p>
+            </div>
+            <div class="case-legal-grid">
+              <div class="legal-box">
+                <h4><span class="dot-red"></span> HelixPharma's Defense</h4>
+                <ul>
+                  <li>GenomeLink's Terms of Service explicitly permitted data sharing for research purposes; Okafor consented</li>
+                  <li>The data was properly anonymized per industry standards before transfer</li>
+                  <li>The drug is a novel pharmaceutical invention — not Okafor's DNA — and is the product of billions in R&D investment</li>
+                  <li>Moore v. Regents (1990) established that individuals have no property rights in biological materials post-separation</li>
+                </ul>
+              </div>
+              <div class="legal-box">
+                <h4><span class="dot-green"></span> BFF / Okafor's Arguments</h4>
+                <ul>
+                  <li>Genetic data can never be truly anonymized — it is inherently identifiable and re-identifiable</li>
+                  <li>A clickwrap ToS for a $99 ancestry service cannot constitute informed consent for billion-dollar pharmaceutical development</li>
+                  <li>The 23andMe bankruptcy (2025) proved that genetic data is treated as a corporate asset — individuals deserve ownership protections</li>
+                  <li>Carpenter v. U.S. (2018) recognized that intimate data disclosed to companies retains privacy protections</li>
+                </ul>
+              </div>
+              <div class="legal-box">
+                <h4><span class="dot-blue"></span> Relevant Precedent</h4>
+                <ul>
+                  <li>Moore v. Regents (1990) — no property rights in cells (but BFF argues genomic data is distinct from physical tissue)</li>
+                  <li>Greenberg v. Miami Children's (2003) — unjust enrichment claims survived</li>
+                  <li>23andMe bankruptcy proceedings (2025) — genetic data as corporate asset</li>
+                  <li>GDPR genetic data provisions — European model for data sovereignty</li>
+                </ul>
+              </div>
+              <div class="legal-box">
+                <h4><span class="dot-amber"></span> Future Impact</h4>
+                <p>A ruling for Okafor could establish that genetic data constitutes a form of intellectual property belonging to the individual, creating a new legal framework for benefit-sharing in genomic medicine. It could also invalidate the business model of every consumer genetics company that relies on broad ToS consent for data monetization, reshaping the entire biotech industry.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASE 3 -->
+      <div class="case-card" id="case3">
+        <div class="case-header" onclick="toggleCase('case3')">
+          <div class="case-header-left">
+            <div class="case-number c3">III</div>
+            <div class="case-meta">
+              <h3>The Biometric Refuser</h3>
+              <span class="case-tagline">Washington v. Meridian Health Systems (2038) — The Right to Refuse Biological Surveillance</span>
+            </div>
+          </div>
+          <div class="case-chevron">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4 6l4 4 4-4"/></svg>
+          </div>
+        </div>
+        <div class="case-body">
+          <div class="case-content">
+            <div class="case-narrative">
+              <p>In 2038, James Washington — a senior software engineer at a Fortune 500 tech company — is informed that the company's new health insurance program, administered by Meridian Health Systems, requires all employees to wear a continuous biometric monitoring device (tracking heart rate, blood oxygen, sleep patterns, stress hormones, and glucose levels) and submit to annual genetic screening. Employees who comply receive a 40% premium reduction; those who refuse pay the full, substantially higher rate.</p>
+              <p>Washington refuses, citing religious beliefs, privacy concerns, and a family history of genetic conditions he does not wish to disclose. He is not fired outright but is placed on an "alternative benefits track" with significantly reduced health coverage, effectively making his position economically untenable. He resigns and sues under Title II of GINA, the ADA, and a novel biological civil liberties theory.</p>
+              <p>The BFF files on behalf of Washington, arguing that mandatory biometric surveillance as a condition of employment constitutes compelled biological disclosure — a violation of the fundamental right to biological privacy — and that financial penalties for refusal are constructive compulsion.</p>
+            </div>
+            <div class="case-legal-grid">
+              <div class="legal-box">
+                <h4><span class="dot-red"></span> Meridian's Defense</h4>
+                <ul>
+                  <li>The program is voluntary — employees can choose the alternative benefits track with no monitoring</li>
+                  <li>Wellness programs with financial incentives are permitted under the ACA and EEOC guidelines</li>
+                  <li>Biometric data is used solely for health optimization and premium calculation, not employment decisions</li>
+                  <li>GINA's employment protections apply to genetic information used in hiring/firing decisions, not insurance wellness incentives</li>
+                </ul>
+              </div>
+              <div class="legal-box">
+                <h4><span class="dot-green"></span> BFF / Washington's Arguments</h4>
+                <ul>
+                  <li>A 40% premium differential makes refusal economically coercive — this is compelled biological disclosure, not a voluntary program</li>
+                  <li>Continuous biometric monitoring generates a comprehensive biological profile far more invasive than any single test</li>
+                  <li>Genetic screening as a condition of affordable insurance violates the spirit (if not the letter) of GINA</li>
+                  <li>Illinois BIPA established that biometric data collection requires informed, uncoerced consent — financial pressure vitiates consent</li>
+                </ul>
+              </div>
+              <div class="legal-box">
+                <h4><span class="dot-blue"></span> Relevant Precedent</h4>
+                <ul>
+                  <li>GINA (2008) — prohibits genetic discrimination in employment and health insurance</li>
+                  <li>Illinois BIPA (2008) — biometric data requires informed consent</li>
+                  <li>EEOC v. Honeywell (2014) — challenged wellness program penalties as coercive</li>
+                  <li>Carpenter v. U.S. (2018) — comprehensive data collection receives heightened protection</li>
+                </ul>
+              </div>
+              <div class="legal-box">
+                <h4><span class="dot-amber"></span> Future Impact</h4>
+                <p>A ruling for Washington could establish that biological monitoring cannot be economically compelled, creating a bright-line rule against mandatory biometric surveillance in the workplace. It would force a reckoning with the growing practice of employers using health data as a condition of benefits, and could catalyze a new federal Biological Privacy Act.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== GET INVOLVED ========== -->
+<section class="section involved-section" id="involved">
+  <div class="container">
+    <span class="section-label" style="color:var(--sage)">Take Action</span>
+    <h2 class="section-title" style="color:var(--white)">Your Biology Needs Defenders</h2>
+    <p class="section-subtitle" style="color:rgba(255,255,255,.6)">The fight for biological civil liberties is just beginning. Here's how you can help build the future of biological rights.</p>
+
+    <div class="involved-grid">
+      <div class="involved-card">
+        <div class="involved-icon">&#x1F4E2;</div>
+        <h3>Report a Violation</h3>
+        <p>Has your genetic data been shared without consent? Were you discriminated against based on biological information? Have your biometric rights been violated? Report it to the BFF and we'll investigate.</p>
+      </div>
+      <div class="involved-card">
+        <div class="involved-icon">&#x1F91D;</div>
+        <h3>Volunteer &amp; Advocate</h3>
+        <p>Join our network of attorneys, scientists, policy advocates, and community organizers working to protect biological rights in your state. Help us draft legislation, educate the public, and build coalitions.</p>
+      </div>
+      <div class="involved-card">
+        <div class="involved-icon">&#x1F4B0;</div>
+        <h3>Support the Mission</h3>
+        <p>Like the EFF, the BFF is funded by individuals who believe in protecting fundamental rights. Your support funds legal battles, policy research, and the technology tools that put biological sovereignty back in your hands.</p>
+      </div>
+      <div class="involved-card">
+        <div class="involved-icon">&#x1F4DA;</div>
+        <h3>Know Your Rights</h3>
+        <p>Download our Biological Rights Toolkit — a comprehensive guide to your rights under GINA, HIPAA, state biometric laws, and emerging genetic privacy protections. Knowledge is the first line of defense.</p>
+      </div>
+      <div class="involved-card">
+        <div class="involved-icon">&#x1F4BB;</div>
+        <h3>Contribute Code</h3>
+        <p>Help build open-source tools for encrypted genetic data storage, health record sovereignty platforms, and biometric opt-out technologies. Your code can protect millions.</p>
+      </div>
+      <div class="involved-card">
+        <div class="involved-icon">&#x1F4E7;</div>
+        <h3>Stay Informed</h3>
+        <p>Subscribe to the BFF newsletter for updates on biological rights cases, policy developments, and action alerts. Follow us on social media and share the movement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== RESOURCES ========== -->
+<section class="section resources-section" id="resources">
+  <div class="container">
+    <span class="section-label">Resources</span>
+    <h2 class="section-title">Key Legislation, Cases &amp; Organizations</h2>
+    <p class="section-subtitle">Essential reading for understanding the landscape of biological civil liberties.</p>
+
+    <div class="resources-grid">
+      <div class="resource-group">
+        <h3>
+          <svg viewBox="0 0 20 20" fill="var(--helix-blue)"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/></svg>
+          Landmark Court Cases
+        </h3>
+        <ul>
+          <li><a href="https://supreme.justia.com/cases/federal/us/274/200/">Buck v. Bell (1927) &rarr;</a></li>
+          <li><a href="https://law.justia.com/cases/california/supreme-court/3d/51/120.html">Moore v. Regents of UC (1990) &rarr;</a></li>
+          <li><a href="https://law.justia.com/cases/federal/district-courts/FSupp2/208/918/2563184/">Greenberg v. Miami Children's (2003) &rarr;</a></li>
+          <li><a href="https://supreme.justia.com/cases/federal/us/569/576/">AMP v. Myriad Genetics (2013) &rarr;</a></li>
+          <li><a href="https://supreme.justia.com/cases/federal/us/569/435/">Maryland v. King (2013) &rarr;</a></li>
+          <li><a href="https://supreme.justia.com/cases/federal/us/585/16-402/">Carpenter v. United States (2018) &rarr;</a></li>
+        </ul>
+      </div>
+      <div class="resource-group">
+        <h3>
+          <svg viewBox="0 0 20 20" fill="var(--amber)"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/></svg>
+          Key Legislation
+        </h3>
+        <ul>
+          <li><a href="https://www.hhs.gov/hipaa/for-professionals/privacy/laws-regulations/index.html">HIPAA Privacy Rule (1996) &rarr;</a></li>
+          <li><a href="https://www.eeoc.gov/statutes/genetic-information-nondiscrimination-act-2008">GINA (2008) &rarr;</a></li>
+          <li><a href="https://www.hhs.gov/ohrp/regulations-and-policy/regulations/common-rule/index.html">The Common Rule &rarr;</a></li>
+          <li><a href="https://www.recordinglaw.com/us-laws/data-privacy-laws/illinois-data-privacy-laws/">Illinois BIPA &rarr;</a></li>
+          <li><a href="https://www.findlaw.com/healthcare/patient-rights/right-to-try-laws-and-access-to-experimental-drugs.html">Right to Try Act (2018) &rarr;</a></li>
+          <li><a href="https://www.genome.gov/about-genomics/policy-issues/Genetic-Discrimination">Genetic Discrimination Overview &rarr;</a></li>
+        </ul>
+      </div>
+      <div class="resource-group">
+        <h3>
+          <svg viewBox="0 0 20 20" fill="var(--emerald)"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/></svg>
+          Organizations &amp; Movements
+        </h3>
+        <ul>
+          <li><a href="https://www.eff.org/">Electronic Frontier Foundation &rarr;</a></li>
+          <li><a href="https://www.aclu.org/news/privacy-technology">ACLU — Privacy &amp; Technology &rarr;</a></li>
+          <li><a href="https://epic.org/">Electronic Privacy Information Center &rarr;</a></li>
+          <li><a href="https://openinsulin.org/">Open Insulin Project &rarr;</a></li>
+          <li><a href="https://www.genome.gov/">National Human Genome Research Institute &rarr;</a></li>
+          <li><a href="https://innovativegenomics.org/">Innovative Genomics Institute &rarr;</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2026 Biological Frontier Foundation. Defending your biological rights.</p>
+    <p style="margin-top:8px">Modeled after the <a href="https://www.eff.org/" target="_blank">Electronic Frontier Foundation</a> — because biology is the new digital frontier.</p>
+  </div>
+</footer>
+
+<!-- ========== JAVASCRIPT ========== -->
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Timeline animation on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.tl-item').forEach(item => observer.observe(item));
+
+// Timeline filters
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.tl-item').forEach(item => {
+      if (filter === 'all' || item.dataset.type === filter) {
+        item.style.display = '';
+        setTimeout(() => item.classList.add('visible'), 100);
+      } else {
+        item.style.display = 'none';
+        item.classList.remove('visible');
+      }
+    });
+  });
+});
+
+// Case study toggle
+function toggleCase(id) {
+  const card = document.getElementById(id);
+  const wasOpen = card.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.case-card').forEach(c => c.classList.remove('open'));
+  // Toggle clicked
+  if (!wasOpen) card.classList.add('open');
+}
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
 </body>
 </html>
